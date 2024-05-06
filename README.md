@@ -21,9 +21,9 @@ The repo contains:
 
 **Usage**
 1. **Clone the repository:**
-'''
+```
 git clone https://github.com/yourusername/bird-species-classifier.git
-'''
+```
 3. **Install the required dependencies:**
 pip install -r requirements.txt
 4. **Prepare your dataset:** Organize your bird images into directories based on their species. Each directory should contain images of one bird species.
