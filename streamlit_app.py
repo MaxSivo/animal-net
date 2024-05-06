@@ -11,14 +11,14 @@ import sqlite3
 from datetime import datetime
 import io
 
-# Connect to the SQLite database
-conn = sqlite3.connect('observations.db')
-c = conn.cursor()
+# # Connect to the SQLite database
+# conn = sqlite3.connect('observations.db')
+# c = conn.cursor()
 
-# Create a table to store observations if it doesn't exist
-c.execute('''CREATE TABLE IF NOT EXISTS observations
-             (id INTEGER PRIMARY KEY AUTOINCREMENT, image BLOB, species TEXT, date TEXT, location TEXT)''')
-conn.commit()
+# # Create a table to store observations if it doesn't exist
+# c.execute('''CREATE TABLE IF NOT EXISTS observations
+#              (id INTEGER PRIMARY KEY AUTOINCREMENT, image BLOB, species TEXT, date TEXT, location TEXT)''')
+# conn.commit()
 
 
 class SimpleCNN(nn.Module):
@@ -108,57 +108,57 @@ if uploaded_file is not None:
 
     st.write(f'Prediction: {species}')
 
-    # Extract metadata from the image
-    exif_data = image._getexif()
-    date = None
-    location = None
+#     # Extract metadata from the image
+#     exif_data = image._getexif()
+#     date = None
+#     location = None
 
-    if exif_data:
-        for tag, value in exif_data.items():
-            tag_name = TAGS.get(tag, tag)
-            if tag_name == 'DateTimeOriginal':
-                date = value
-            elif tag_name == 'GPSInfo':
-                location = value
+#     if exif_data:
+#         for tag, value in exif_data.items():
+#             tag_name = TAGS.get(tag, tag)
+#             if tag_name == 'DateTimeOriginal':
+#                 date = value
+#             elif tag_name == 'GPSInfo':
+#                 location = value
 
-    # If date or location is missing, prompt the user to input manually
-    if not date:
-        date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    if not location:
-        location = st.text_input("Location:", "")
+#     # If date or location is missing, prompt the user to input manually
+#     if not date:
+#         date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+#     if not location:
+#         location = st.text_input("Location:", "")
 
-    if st.button("Save Observation"):
-        # Convert image to bytes
-        img_bytes = uploaded_file.getvalue()
-        # Insert observation into database
-        c.execute("INSERT INTO observations (image, species, date, location) VALUES (?, ?, ?, ?)",
-                  (img_bytes, str(species), str(date), str(location)))
-        conn.commit()
+#     if st.button("Save Observation"):
+#         # Convert image to bytes
+#         img_bytes = uploaded_file.getvalue()
+#         # Insert observation into database
+#         c.execute("INSERT INTO observations (image, species, date, location) VALUES (?, ?, ?, ?)",
+#                   (img_bytes, str(species), str(date), str(location)))
+#         conn.commit()
 
-show_observations = st.button("Show Observations")
-if show_observations:
-    st.subheader("Observations")
-    # Retrieve observations from the database
-    observations = c.execute("SELECT id, species, date, location, image FROM observations ORDER BY id ASC").fetchall()
-    for obs in observations:
-        obs_id, species, date, location, img_bytes = obs
-        # Display species, date, and location
-        st.write(f"Species: {species}")
-        st.write(f"Date: {date}")
-        st.write(f"Location: {location}")
-        # Display image
-        img = Image.open(io.BytesIO(img_bytes))
-        st.image(img, caption='Observation Image', use_column_width=True)
-        # Add delete button for each observation
-        delete_button = st.button(f"Delete Observation {obs_id}")
-        if delete_button:
-            try:
-                print(f"Deleting observation with ID: {obs_id}")
-                c.execute("DELETE FROM observations WHERE id=?", (obs_id,))
-                conn.commit()
-                st.write("Observation deleted successfully.")
-                # Refresh observations after deletion
-                st.experimental_rerun()
-            except Exception as e:
-                st.error(f"Error deleting observation: {e}")
-conn.close()
+# show_observations = st.button("Show Observations")
+# if show_observations:
+#     st.subheader("Observations")
+#     # Retrieve observations from the database
+#     observations = c.execute("SELECT id, species, date, location, image FROM observations ORDER BY id ASC").fetchall()
+#     for obs in observations:
+#         obs_id, species, date, location, img_bytes = obs
+#         # Display species, date, and location
+#         st.write(f"Species: {species}")
+#         st.write(f"Date: {date}")
+#         st.write(f"Location: {location}")
+#         # Display image
+#         img = Image.open(io.BytesIO(img_bytes))
+#         st.image(img, caption='Observation Image', use_column_width=True)
+#         # Add delete button for each observation
+#         delete_button = st.button(f"Delete Observation {obs_id}")
+#         if delete_button:
+#             try:
+#                 print(f"Deleting observation with ID: {obs_id}")
+#                 c.execute("DELETE FROM observations WHERE id=?", (obs_id,))
+#                 conn.commit()
+#                 st.write("Observation deleted successfully.")
+#                 # Refresh observations after deletion
+#                 st.experimental_rerun()
+#             except Exception as e:
+#                 st.error(f"Error deleting observation: {e}")
+# conn.close()
