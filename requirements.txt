@@ -1,4 +1,4 @@
 PyTorch
 torchvision
-PIL
+Pillow
 tqdm
