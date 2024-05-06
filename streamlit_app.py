@@ -39,10 +39,17 @@ class SimpleCNN(nn.Module):
         return x
 
 
-model = SimpleCNN()
-state_dict = torch.load('weights/bird_weights.pth')
-model.load_state_dict(state_dict)
-model.eval()
+# Load the trained model
+@st.cache_resource
+def load_model():
+    model = SimpleCNN()
+    state_dict = torch.load('weights/bird_weights.pth', map_location=torch.device('cpu'))
+    model.load_state_dict(state_dict)
+    model.eval()
+    return model
+
+model = load_model()
+
 
 st.title('Animal Classification')
 st.write('Upload an image, and the CNN will predict the species.')
