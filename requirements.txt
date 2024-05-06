@@ -1,4 +1,4 @@
-Python 3.x
+python>=3.0
 PyTorch
 torchvision
 PIL
