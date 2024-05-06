@@ -1,5 +1,5 @@
 Python 3.x
 PyTorch
 torchvision
-PIL (Python Imaging Library)
+PIL
 tqdm
