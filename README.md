@@ -21,14 +21,16 @@ The repo contains:
 
 **Usage**
 1. **Clone the repository:**
+'''
 git clone https://github.com/yourusername/bird-species-classifier.git
-2. **Install the required dependencies:**
+'''
+3. **Install the required dependencies:**
 pip install -r requirements.txt
-3. **Prepare your dataset:** Organize your bird images into directories based on their species. Each directory should contain images of one bird species.
-4. Adjust the dataset path and parameters in the code as needed.
-5. **Run the training script:**
+4. **Prepare your dataset:** Organize your bird images into directories based on their species. Each directory should contain images of one bird species.
+5. Adjust the dataset path and parameters in the code as needed.
+6. **Run the training script:**
 python train.py
-6. Once training is complete, the trained model weights will be saved to a file specified in the code.
+7. Once training is complete, the trained model weights will be saved to a file specified in the code.
 ---
 
 **License**
