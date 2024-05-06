@@ -1,9 +1,9 @@
 **Animal Classifier**
-----
+---
 The repo contains:
 - [train_CNN.py](https://github.com/movesen/animal-classification/blob/main/train_CNN.py) - Train CNN
 - [streamlit_app.py](https://github.com/movesen/animal-classification/blob/main/streamlit_app.py) - Streamlit application backend
-
+---
 **Features**
 - Custom Dataset: The code includes a custom dataset class that loads images from a directory structure organized by bird species and preprocesses them for training.
 - Convolutional Neural Network: A CNN architecture is implemented using PyTorch, comprising convolutional layers, max-pooling layers, dropout layers, and fully connected layers.
