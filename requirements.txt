@@ -1,4 +1,4 @@
-PyTorch
+torch==2.2.2
 torchvision
 Pillow
 tqdm
